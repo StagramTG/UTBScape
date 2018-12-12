@@ -39,13 +39,16 @@ public class HexGrid : MonoBehaviour {
 
 	HexCellShaderData cellShaderData;
 
-	void Awake () {
+	public void Init(int psizeX, int psizeY)
+    {
 		HexMetrics.noiseSource = noiseSource;
 		HexMetrics.InitializeHashGrid(seed);
 		HexUnit.unitPrefab = unitPrefab;
+
 		cellShaderData = gameObject.AddComponent<HexCellShaderData>();
 		cellShaderData.Grid = this;
-		CreateMap(cellCountX, cellCountZ);
+
+		CreateMap(psizeX, psizeY);
 	}
 
 	public void AddUnit (HexUnit unit, HexCell location, float orientation) {
