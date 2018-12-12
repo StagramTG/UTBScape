@@ -40,6 +40,7 @@ public class HexGrid : MonoBehaviour {
 	HexCellShaderData cellShaderData;
 
 	public void Init(int psizeX, int psizeY)
+    //void Awake()
     {
 		HexMetrics.noiseSource = noiseSource;
 		HexMetrics.InitializeHashGrid(seed);
@@ -48,6 +49,7 @@ public class HexGrid : MonoBehaviour {
 		cellShaderData = gameObject.AddComponent<HexCellShaderData>();
 		cellShaderData.Grid = this;
 
+		//CreateMap(cellCountX, cellCountZ);
 		CreateMap(psizeX, psizeY);
 	}
 
