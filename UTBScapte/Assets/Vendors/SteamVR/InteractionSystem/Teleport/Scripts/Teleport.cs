@@ -34,6 +34,9 @@ namespace Valve.VR.InteractionSystem
 		public Color pointerLockedColor;
 		public bool showPlayAreaMarker = true;
 
+        public HexGrid grid;
+        public TeleportPoint teleportPoint;
+
 		public float teleportFadeTime = 0.1f;
 		public float meshFadeTime = 0.2f;
 
@@ -113,6 +116,9 @@ namespace Valve.VR.InteractionSystem
 
 		SteamVR_Events.Action chaperoneInfoInitializedAction;
 
+        private HexCell currentCell;
+        private HexUnit currentUnit;
+
 		// Events
 
 		public static SteamVR_Events.Event< float > ChangeScene = new SteamVR_Events.Event< float >();
@@ -138,6 +144,11 @@ namespace Valve.VR.InteractionSystem
 				return _instance;
 			}
 		}
+
+        public void setCurrentUnit(HexUnit unit)
+        {
+            this.currentUnit = unit;
+        }
 
 
 		//-------------------------------------------------
@@ -335,20 +346,22 @@ namespace Valve.VR.InteractionSystem
 			teleportArc.SetArcData( pointerStart, arcVelocity, true, pointerAtBadAngle );
 			if ( teleportArc.DrawArc( out hitInfo ) )
 			{
-				hitSomething = true;
+                currentCell = grid.GetCell(hitInfo.point);
+                teleportPoint.transform.position = currentCell.transform.position;
+                hitSomething = true;
 				hitTeleportMarker = hitInfo.collider.GetComponentInParent<TeleportMarkerBase>();
-			}
+            }
 
 			if ( pointerAtBadAngle )
 			{
 				hitTeleportMarker = null;
 			}
 
-			HighlightSelected( hitTeleportMarker );
+            HighlightSelected( hitTeleportMarker );
 
-			if ( hitTeleportMarker != null ) //Hit a teleport marker
+            if ( hitTeleportMarker != null ) //Hit a teleport marker
 			{
-				if ( hitTeleportMarker.locked )
+                if ( hitTeleportMarker.locked )
 				{
 					teleportArc.SetColor( pointerLockedColor );
 #if (UNITY_5_4)
@@ -361,7 +374,7 @@ namespace Valve.VR.InteractionSystem
 				}
 				else
 				{
-					teleportArc.SetColor( pointerValidColor );
+                    teleportArc.SetColor( pointerValidColor );
 #if (UNITY_5_4)
 					pointerLineRenderer.SetColors( pointerValidColor, pointerValidColor );
 #else
@@ -794,7 +807,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void PlayPointerHaptic( bool validLocation )
 		{
-			if ( pointerHand != null )
+			/*if ( pointerHand != null )
 			{
 				if ( validLocation )
 				{
@@ -804,7 +817,7 @@ namespace Valve.VR.InteractionSystem
 				{
 					pointerHand.TriggerHapticPulse( 100 );
 				}
-			}
+			}*/
 		}
 
 
@@ -817,9 +830,9 @@ namespace Valve.VR.InteractionSystem
 				{
 					//Pointing at an unlocked teleport marker
 					teleportingToMarker = pointedAtTeleportMarker;
-					InitiateTeleportFade();
+                    InitiateTeleportFade();
 
-					CancelTeleportHint();
+                    CancelTeleportHint();
 				}
 			}
 		}
@@ -892,6 +905,7 @@ namespace Valve.VR.InteractionSystem
 			{
 				Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
 				player.trackingOriginTransform.position = teleportPosition + playerFeetOffset;
+                currentUnit.Location = currentCell;
 			}
 			else
 			{
@@ -907,19 +921,19 @@ namespace Valve.VR.InteractionSystem
 		{
 			if ( pointedAtTeleportMarker != hitTeleportMarker ) //Pointing at a new teleport marker
 			{
-				if ( pointedAtTeleportMarker != null )
+                if ( pointedAtTeleportMarker != null )
 				{
-					pointedAtTeleportMarker.Highlight( false );
+                    pointedAtTeleportMarker.Highlight( false );
 				}
 
 				if ( hitTeleportMarker != null )
 				{
-					hitTeleportMarker.Highlight( true );
+                    hitTeleportMarker.Highlight( true );
 
-					prevPointedAtPosition = pointedAtPosition;
-					PlayPointerHaptic( !hitTeleportMarker.locked );
+                    prevPointedAtPosition = pointedAtPosition;
+                    PlayPointerHaptic( !hitTeleportMarker.locked );
 
-					PlayAudioClip( reticleAudioSource, goodHighlightSound );
+                    PlayAudioClip( reticleAudioSource, goodHighlightSound );
 
 					loopingAudioSource.volume = loopingAudioMaxVolume;
 				}

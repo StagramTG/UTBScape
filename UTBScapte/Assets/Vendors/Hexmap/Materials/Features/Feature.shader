@@ -36,8 +36,8 @@
 			float3 pos = mul(unity_ObjectToWorld, v.vertex);
 
 			float4 gridUV = float4(pos.xz, 0, 0);
-			gridUV.x *= 1 / (4 * 8.66025404);
-			gridUV.y *= 1 / (2 * 15.0);
+			gridUV.x *= 1 / (2 * 8.66025404);
+			gridUV.y *= 1 / (1 * 15.0);
 			float2 cellDataCoordinates =
 				floor(gridUV.xy) + tex2Dlod(_GridCoordinates, gridUV).rg;
 			cellDataCoordinates *= 2;
