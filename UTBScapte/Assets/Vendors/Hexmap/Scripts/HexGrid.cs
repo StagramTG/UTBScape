@@ -121,14 +121,14 @@ public class HexGrid : MonoBehaviour {
 		units.Clear();
 	}
 
-	void OnEnable () {
+	/*void OnEnable () {
 		if (!HexMetrics.noiseSource) {
 			HexMetrics.noiseSource = noiseSource;
 			HexMetrics.InitializeHashGrid(seed);
 			HexUnit.unitPrefab = unitPrefab;
 			ResetVisibility();
 		}
-	}
+	}*/
 
 	public HexCell GetCell (Ray ray) {
 		RaycastHit hit;

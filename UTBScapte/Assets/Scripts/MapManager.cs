@@ -8,6 +8,8 @@ public class MapManager : MonoBehaviour
     public HexMapGenerator mapGenerator;
     public GameObject cameraVR;
 
+    public Material terrainMaterial;
+
     int mapX = 20;
     int mapY = 15;
 
@@ -18,5 +20,8 @@ public class MapManager : MonoBehaviour
 
         HexCell cell = grid.GetCell(new HexCoordinates(10, 7));
         cameraVR.transform.position = cell.transform.position;
+
+        Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
+        terrainMaterial.DisableKeyword("GRID_ON");
     }
 }

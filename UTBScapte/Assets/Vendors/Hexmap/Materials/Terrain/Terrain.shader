@@ -82,8 +82,8 @@
 			fixed4 grid = 1;
 			#if defined(GRID_ON)
 				float2 gridUV = IN.worldPos.xz;
-				gridUV.x *= 1 / (4 * 8.66025404);
-				gridUV.y *= 1 / (2 * 15.0);
+				gridUV.x *= 1 / (2 * 8.66025404);
+				gridUV.y *= 1 / (1 * 15.0);
 				grid = tex2D(_GridTex, gridUV);
 			#endif
 
