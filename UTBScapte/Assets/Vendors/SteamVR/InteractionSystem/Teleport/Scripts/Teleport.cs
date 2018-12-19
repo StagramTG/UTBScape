@@ -353,6 +353,7 @@ namespace Valve.VR.InteractionSystem
                     teleportPointOpen.gameObject.SetActive(true);
                     teleportPointClose.gameObject.SetActive(false);
                     teleportPointOpen.transform.position = pointingCell.transform.position;
+                    grid.FindPath(currentUnit.Location, pointingCell, currentUnit);
                 }
                 else
                 {
