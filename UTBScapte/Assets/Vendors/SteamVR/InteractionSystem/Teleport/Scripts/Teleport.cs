@@ -35,7 +35,8 @@ namespace Valve.VR.InteractionSystem
 		public bool showPlayAreaMarker = true;
 
         public HexGrid grid;
-        public TeleportPoint teleportPoint;
+        public TeleportPoint teleportPointOpen;
+        public TeleportPoint teleportPointClose;
 
 		public float teleportFadeTime = 0.1f;
 		public float meshFadeTime = 0.2f;
@@ -116,7 +117,7 @@ namespace Valve.VR.InteractionSystem
 
 		SteamVR_Events.Action chaperoneInfoInitializedAction;
 
-        private HexCell currentCell;
+        private HexCell pointingCell;
         private HexUnit currentUnit;
 
 		// Events
@@ -346,8 +347,20 @@ namespace Valve.VR.InteractionSystem
 			teleportArc.SetArcData( pointerStart, arcVelocity, true, pointerAtBadAngle );
 			if ( teleportArc.DrawArc( out hitInfo ) )
 			{
-                currentCell = grid.GetCell(hitInfo.point);
-                teleportPoint.transform.position = currentCell.transform.position;
+                pointingCell = grid.GetCell(hitInfo.point);
+                if (currentUnit.IsValidDestination(pointingCell))
+                {
+                    teleportPointOpen.gameObject.SetActive(true);
+                    teleportPointClose.gameObject.SetActive(false);
+                    teleportPointOpen.transform.position = pointingCell.transform.position;
+                }
+                else
+                {
+                    teleportPointOpen.gameObject.SetActive(false);
+                    teleportPointClose.gameObject.SetActive(true);
+                    teleportPointClose.transform.position = pointingCell.transform.position;
+                }
+
                 hitSomething = true;
 				hitTeleportMarker = hitInfo.collider.GetComponentInParent<TeleportMarkerBase>();
             }
@@ -905,7 +918,7 @@ namespace Valve.VR.InteractionSystem
 			{
 				Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
 				player.trackingOriginTransform.position = teleportPosition + playerFeetOffset;
-                currentUnit.Location = currentCell;
+                currentUnit.Location = pointingCell;
 			}
 			else
 			{
