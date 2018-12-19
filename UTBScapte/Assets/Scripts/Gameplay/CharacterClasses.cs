@@ -7,4 +7,5 @@ public class CharacterClasses : ScriptableObject
 {
 	public string Name = "Class name";
 	public int BaseLife = 100;
+	public int BaseDamage = 10;
 }
