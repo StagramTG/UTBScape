@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     public GameObject cameraVR;
     public Teleport teleport;
 
+    public HexUnit startUnit;
+
     private HexGrid grid;
     private HexUnit currentUnit;
 
@@ -18,8 +20,9 @@ public class GameManager : MonoBehaviour {
         HexCell cell = grid.GetCell(new HexCoordinates(10, 7));
         cameraVR.transform.position = cell.transform.position;
 
-        grid.AddUnit(Instantiate(HexUnit.unitPrefab), cell, Random.Range(0f, 360f));
+        grid.AddUnit(Instantiate(startUnit), cell, Random.Range(0f, 360f));
         currentUnit = cell.Unit;
+        currentUnit.gameObject.SetActive(false);
         teleport.setCurrentUnit(currentUnit);
     }
 }

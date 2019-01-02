@@ -8,7 +8,7 @@ public class HexUnit : MonoBehaviour {
 	const float rotationSpeed = 180f;
 	const float travelSpeed = 4f;
 
-	public static HexUnit unitPrefab;
+	//public static HexUnit unitPrefab;
 
 	public HexGrid Grid { get; set; }
 
@@ -175,7 +175,7 @@ public class HexUnit : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	public void Save (BinaryWriter writer) {
+	/*public void Save (BinaryWriter writer) {
 		location.coordinates.Save(writer);
 		writer.Write(orientation);
 	}
@@ -186,7 +186,7 @@ public class HexUnit : MonoBehaviour {
 		grid.AddUnit(
 			Instantiate(unitPrefab), grid.GetCell(coordinates), orientation
 		);
-	}
+	}*/
 
 	void OnEnable () {
 		if (location) {

@@ -382,6 +382,8 @@ MonoBehaviour:
   mapManager: {fileID: 176702757}
   cameraVR: {fileID: 133215422}
   teleport: {fileID: 1088226698}
+  startUnit: {fileID: 114748284610759064, guid: 7db32259a2349fb4f8a9a04669a621dd,
+    type: 2}
 --- !u!4 &757197081
 Transform:
   m_ObjectHideFlags: 0
@@ -446,8 +448,6 @@ MonoBehaviour:
   cellPrefab: {fileID: 11422220, guid: 94c2312396697489abc866a188f80152, type: 2}
   cellLabelPrefab: {fileID: 11470134, guid: f68794ca03b6f4510b9a5bd6ee9ba2f4, type: 2}
   chunkPrefab: {fileID: 114000010052569294, guid: 7622d007cafd044a1b1189c0b93d2912,
-    type: 2}
-  unitPrefab: {fileID: 114748284610759064, guid: 7db32259a2349fb4f8a9a04669a621dd,
     type: 2}
   noiseSource: {fileID: 2800000, guid: 38701cdeb1fb9427cbb585f917aa59cb, type: 3}
   seed: 1234

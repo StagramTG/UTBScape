@@ -11,7 +11,7 @@ public class HexGrid : MonoBehaviour {
 	public HexCell cellPrefab;
 	public Text cellLabelPrefab;
 	public HexGridChunk chunkPrefab;
-	public HexUnit unitPrefab;
+	//public HexUnit unitPrefab;
 
 	public Texture2D noiseSource;
 
@@ -44,7 +44,7 @@ public class HexGrid : MonoBehaviour {
     {
 		HexMetrics.noiseSource = noiseSource;
 		HexMetrics.InitializeHashGrid(seed);
-		HexUnit.unitPrefab = unitPrefab;
+		//HexUnit.unitPrefab = unitPrefab;
 
 		cellShaderData = gameObject.AddComponent<HexCellShaderData>();
 		cellShaderData.Grid = this;
@@ -233,10 +233,10 @@ public class HexGrid : MonoBehaviour {
 			cells[i].Save(writer);
 		}
 
-		writer.Write(units.Count);
+		/*writer.Write(units.Count);
 		for (int i = 0; i < units.Count; i++) {
 			units[i].Save(writer);
-		}
+		}*/
 	}
 
 	public void Load (BinaryReader reader, int header) {
@@ -263,12 +263,12 @@ public class HexGrid : MonoBehaviour {
 			chunks[i].Refresh();
 		}
 
-		if (header >= 2) {
+		/*if (header >= 2) {
 			int unitCount = reader.ReadInt32();
 			for (int i = 0; i < unitCount; i++) {
 				HexUnit.Load(reader, this);
 			}
-		}
+		}*/
 
 		cellShaderData.ImmediateMode = originalImmediateMode;
 	}
