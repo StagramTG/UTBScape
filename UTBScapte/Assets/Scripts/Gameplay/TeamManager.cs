@@ -34,7 +34,12 @@ public class TeamManager : MonoBehaviour
             // createUnits
             for(int i = 0; i < unitsQuantityByTeam; ++i)
             {
+                // Instantiate unit
+                GameObject toInstanciate = desc.species.unitsPrefabs[0];
+                GameObject go = Instantiate(toInstanciate);
 
+                // Add instiated unit to team
+                currentTeam.units.Add(go.GetComponent<Unit>());
             }
 
             // Add newly created team to manager list
