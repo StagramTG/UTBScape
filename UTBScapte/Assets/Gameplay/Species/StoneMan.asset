@@ -14,3 +14,5 @@ MonoBehaviour:
   Name: Stone Man
   LifeBoost: 10
   DamageBoost: 2
+  unitsPrefabs:
+  - {fileID: 1625790318440138, guid: c95fbdc1e58a7c147a9e4a1883707806, type: 2}

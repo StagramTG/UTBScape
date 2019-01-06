@@ -14,6 +14,8 @@ public class TeamManager : MonoBehaviour
     // Index of the team currently playing
     public int activeTeamTurnIndex;
 
+    public int unitsQuantityByTeam = 3;
+
 	void Start ()
     {
         teams = new List<Team>();
@@ -22,7 +24,22 @@ public class TeamManager : MonoBehaviour
 
     public void Init()
     {
+        // Init all teams by using data feed "GameInitData" (Static class)
+        foreach(TeamDescriptor desc in GameInitData.teamsDescriptions)
+        {
+            // Create and instantiate team
+            GameObject currentTeamGO = Instantiate(teamPrefab);
+            Team currentTeam = currentTeamGO.GetComponent<Team>();
 
+            // createUnits
+            for(int i = 0; i < unitsQuantityByTeam; ++i)
+            {
+
+            }
+
+            // Add newly created team to manager list
+            AddTeam(currentTeam);
+        }
     }
 
     public void AddTeam(Team pteam)

@@ -8,4 +8,6 @@ public class CharacterSpecies : ScriptableObject
 	public string Name = "Species name";
 	public int LifeBoost = 10;
 	public int DamageBoost = 2;
+
+    public List<GameObject> unitsPrefabs;
 }

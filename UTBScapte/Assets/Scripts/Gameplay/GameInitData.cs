@@ -4,22 +4,19 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 
-namespace Assets.Scripts.Gameplay
+public class TeamDescriptor
 {
-    public class TeamDescriptor
-    {
-        CharacterSpecies species;
-        Team.Type type;
-    }
+    public CharacterSpecies species;
+    public Team.Type type;
+}
 
-    public static class GameInitData
-    {
-        public static List<TeamDescriptor> teamsDescriptions;
+public static class GameInitData
+{
+    public static List<TeamDescriptor> teamsDescriptions;
 
-        // Reset data before configure another game
-        public static void Reset()
-        {
-            teamsDescriptions = new List<TeamDescriptor>();
-        }
+    // Reset data before configure another game
+    public static void Reset()
+    {
+        teamsDescriptions = new List<TeamDescriptor>();
     }
 }
