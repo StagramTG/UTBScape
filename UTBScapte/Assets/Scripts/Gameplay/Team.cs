@@ -12,11 +12,9 @@ public class Team : MonoBehaviour
 
     public List<Unit> units;
     public int unitsCount;
-    public int turnIndex;
 
 	void Start () {
         units = new List<Unit>();
         unitsCount = 0;
-        turnIndex = 0;
 	}
 }

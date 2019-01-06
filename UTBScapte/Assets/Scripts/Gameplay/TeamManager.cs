@@ -13,13 +13,14 @@ public class TeamManager : MonoBehaviour
     public Team activeTeam;
     // Index of the team currently playing
     public int activeTeamTurnIndex;
-
+    // Number of units in each team at game's start
     public int unitsQuantityByTeam = 3;
 
 	void Start ()
     {
         teams = new List<Team>();
         activeTeam = null;
+        activeTeamTurnIndex = 0;
 	}
 
     public void Init()
@@ -45,6 +46,8 @@ public class TeamManager : MonoBehaviour
             // Add newly created team to manager list
             AddTeam(currentTeam);
         }
+
+        activeTeam = teams[activeTeamTurnIndex];
     }
 
     public void AddTeam(Team pteam)
@@ -52,7 +55,7 @@ public class TeamManager : MonoBehaviour
         teams.Add(pteam);
     }
 
-    public void changeActiveTeam()
+    public void changeActiveTeam(int pindex)
     {
 
     }
