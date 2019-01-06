@@ -6,23 +6,39 @@ using Valve.VR.InteractionSystem;
 public class GameManager : MonoBehaviour {
 
     public MapManager mapManager;
-    public GameObject cameraVR;
+    //public GameObject cameraVR;
     public Teleport teleport;
 
-    public HexUnit startUnit;
+    public Unit startUnit;
 
     private HexGrid grid;
-    private HexUnit currentUnit;
+    private Unit currentUnit;
+    private Player player;
 
 	void Start() {
         grid = mapManager.InitMap();
+        player = Player.instance;
 
         HexCell cell = grid.GetCell(new HexCoordinates(10, 7));
-        cameraVR.transform.position = cell.transform.position;
 
-        grid.AddUnit(Instantiate(startUnit), cell, Random.Range(0f, 360f));
-        currentUnit = cell.Unit;
+        Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
+        player.trackingOriginTransform.position = cell.transform.position + playerFeetOffset;
+
+        //cameraVR.transform.position = cell.transform.position;
+
+        currentUnit = Instantiate(startUnit);
+        grid.AddUnit(currentUnit, cell, Random.Range(0f, 360f));
         currentUnit.gameObject.SetActive(false);
         teleport.setCurrentUnit(currentUnit);
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Submit"))
+        {
+            currentUnit.Location = grid.GetCell(player.trackingOriginTransform.position);
+            currentUnit.setMoved(true);
+            teleport.gameObject.SetActive(false);
+        }
     }
 }

@@ -350,10 +350,19 @@ namespace Valve.VR.InteractionSystem
                 pointingCell = grid.GetCell(hitInfo.point);
                 if (currentUnit.IsValidDestination(pointingCell))
                 {
-                    teleportPointOpen.gameObject.SetActive(true);
-                    teleportPointClose.gameObject.SetActive(false);
-                    teleportPointOpen.transform.position = pointingCell.transform.position;
                     grid.FindPath(currentUnit.Location, pointingCell, currentUnit);
+                    if ((pointingCell.Distance - 1) / currentUnit.Speed > 0) //Plus d'un tour pour atteindre ce point
+                    {
+                        teleportPointOpen.gameObject.SetActive(false);
+                        teleportPointClose.gameObject.SetActive(true);
+                        teleportPointClose.transform.position = pointingCell.transform.position;
+                    }
+                    else
+                    {
+                        teleportPointOpen.gameObject.SetActive(true);
+                        teleportPointClose.gameObject.SetActive(false);
+                        teleportPointOpen.transform.position = pointingCell.transform.position;
+                    }
                 }
                 else
                 {
@@ -919,7 +928,6 @@ namespace Valve.VR.InteractionSystem
 			{
 				Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
 				player.trackingOriginTransform.position = teleportPosition + playerFeetOffset;
-                currentUnit.Location = pointingCell;
                 teleportPointOpen.Highlight(false);
 			}
 			else

@@ -323,7 +323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4978546780364400}
   - component: {fileID: 95377894292272850}
-  - component: {fileID: 114748284610759064}
+  - component: {fileID: 114117163425813580}
   m_Layer: 0
   m_Name: goblin
   m_TagString: Untagged
@@ -874,7 +874,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114748284610759064
+--- !u!114 &114117163425813580
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -882,9 +882,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1751857069609518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 434bba114c5e84a0f8fb19ef55b2766a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e763ad1f3949ef4d972faf5ff475fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  classe: {fileID: 11400000, guid: 01c65c1d8496b5643ab8c6774ce94474, type: 2}
+  specie: {fileID: 11400000, guid: 7d05dcdb192fdd242b5bfe4eb0dac218, type: 2}
 --- !u!137 &137689578849704176
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

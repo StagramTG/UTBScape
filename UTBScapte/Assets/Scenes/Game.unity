@@ -166,11 +166,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &133215422 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 2}
-  m_PrefabInternal: {fileID: 133215421}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,9 +375,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapManager: {fileID: 176702757}
-  cameraVR: {fileID: 133215422}
   teleport: {fileID: 1088226698}
-  startUnit: {fileID: 114748284610759064, guid: 7db32259a2349fb4f8a9a04669a621dd,
+  startUnit: {fileID: 114117163425813580, guid: 7db32259a2349fb4f8a9a04669a621dd,
     type: 2}
 --- !u!4 &757197081
 Transform:
