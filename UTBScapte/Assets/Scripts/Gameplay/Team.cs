@@ -15,11 +15,13 @@ public class Team : MonoBehaviour
     private int currentUnitIndex;
     private HexGrid grid;
     private CharacterSpecies specie;
+    private Type type;
 
-    public void Init(HexGrid pGrid, CharacterSpecies pSpecie)
+    public void Init(HexGrid pGrid, CharacterSpecies pSpecie, Type pType)
     {
         this.grid = pGrid;
         this.specie = pSpecie;
+        this.type = pType;
 
         units = new List<Unit>();
         currentUnitIndex = 0;
@@ -40,8 +42,16 @@ public class Team : MonoBehaviour
 
             unit.SetTeam(this);
 
-            // Add unit to grid
-            grid.AddUnit(unit, cell, Random.Range(0f, 360f));
+            if (type == Type.PLAYER)
+            {
+                // Add unit to grid
+                grid.AddUnit(unit, cell, Random.Range(0f, 360f));
+            }
+            else
+            {
+                go.transform.position = cell.transform.position;
+                go.transform.SetParent(this.gameObject.transform, false);
+            }
 
             // Add instiated unit to team
             units.Add(unit);

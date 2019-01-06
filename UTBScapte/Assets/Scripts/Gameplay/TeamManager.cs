@@ -33,7 +33,7 @@ public class TeamManager : MonoBehaviour
             // Create and instantiate team
             GameObject currentTeamGO = Instantiate(teamPrefab);
             Team currentTeam = currentTeamGO.GetComponent<Team>();
-            currentTeam.Init(grid, desc.species);
+            currentTeam.Init(grid, desc.species, desc.type);
 
             // createUnits
             for (int i = 0; i < unitsQuantityByTeam; ++i)

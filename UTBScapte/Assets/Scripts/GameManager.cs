@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetButtonDown("EndTurn"))
         {
-            Debug.Log("End Turn");
             teamManager.nextActiveTeam();
             SetCurrentUnit(teamManager.activeTeam.getCurrentUnit());
         }
