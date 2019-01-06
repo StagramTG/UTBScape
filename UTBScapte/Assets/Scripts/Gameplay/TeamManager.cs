@@ -16,6 +16,8 @@ public class TeamManager : MonoBehaviour
     // Number of units in each team at game's start
     public int unitsQuantityByTeam = 3;
 
+    public HexGrid grid;
+
 	void Awake ()
     {
         teams = new List<Team>();
@@ -31,17 +33,14 @@ public class TeamManager : MonoBehaviour
             // Create and instantiate team
             GameObject currentTeamGO = Instantiate(teamPrefab);
             Team currentTeam = currentTeamGO.GetComponent<Team>();
-            currentTeam.Init();
+            currentTeam.Init(grid, desc.species);
 
             // createUnits
             for (int i = 0; i < unitsQuantityByTeam; ++i)
             {
                 // Instantiate unit
-                GameObject toInstanciate = desc.species.unitsPrefabs[0];
-                GameObject go = Instantiate(toInstanciate);
-
-                // Add instiated unit to team
-                currentTeam.units.Add(go.GetComponent<Unit>());
+                HexCell cell = grid.GetCell(new HexCoordinates(8 + i, 7));
+                currentTeam.CreateUnit(0, cell);
             }
 
             // Add newly created team to manager list
@@ -58,11 +57,21 @@ public class TeamManager : MonoBehaviour
 
     public void changeActiveTeam(int pindex)
     {
+        activeTeam = teams[pindex];
 
+        //Reset movement for all units
+        foreach(Unit unit in activeTeam.units)
+        {
+            unit.setMoved(false);
+        }
     }
 
     public void nextActiveTeam()
     {
+        ++activeTeamTurnIndex;
+        if (activeTeamTurnIndex >= teams.Count)
+            activeTeamTurnIndex = 0;
 
+        changeActiveTeam(activeTeamTurnIndex);
     }
 }

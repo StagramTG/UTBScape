@@ -424,6 +424,7 @@ MonoBehaviour:
   activeTeam: {fileID: 0}
   activeTeamTurnIndex: 0
   unitsQuantityByTeam: 3
+  grid: {fileID: 1481384342}
 --- !u!4 &947002632
 Transform:
   m_ObjectHideFlags: 0

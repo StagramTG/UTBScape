@@ -10,6 +10,7 @@ public class Unit : HexUnit {
     private int life;
     private int damage;
     private bool moved;
+    private Team team;
 
     private void Start()
     {
@@ -18,11 +19,20 @@ public class Unit : HexUnit {
         moved = false;
     }
 
+    public void SetTeam(Team pTeam)
+    {
+        this.team = pTeam;
+    }
+
     public void takeDamage(int pDamage)
     {
         life -= pDamage;
         if (life <= 0)
+        {
+            team.units.Remove(this);
+            team = null;
             this.Die();
+        }
     }
 
     public int getDamage()
