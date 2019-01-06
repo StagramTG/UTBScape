@@ -16,6 +16,9 @@ public class MainMenuInteractions : MonoBehaviour
         desc.type = Team.Type.PLAYER;
         desc.species = defaultSpecies;
 
+        GameInitData.Reset();
+        GameInitData.teamsDescriptions.Add(desc);
+
         SceneManager.LoadScene(1);
     }
 
@@ -23,5 +26,10 @@ public class MainMenuInteractions : MonoBehaviour
     {
         Debug.Log("Quit pressed !!!");
         Application.Quit();
+    }
+
+    private void Start()
+    {
+        PlayButtonPressed();
     }
 }

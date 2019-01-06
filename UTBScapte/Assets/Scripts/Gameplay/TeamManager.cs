@@ -16,7 +16,7 @@ public class TeamManager : MonoBehaviour
     // Number of units in each team at game's start
     public int unitsQuantityByTeam = 3;
 
-	void Start ()
+	void Awake ()
     {
         teams = new List<Team>();
         activeTeam = null;
@@ -31,9 +31,10 @@ public class TeamManager : MonoBehaviour
             // Create and instantiate team
             GameObject currentTeamGO = Instantiate(teamPrefab);
             Team currentTeam = currentTeamGO.GetComponent<Team>();
+            currentTeam.Init();
 
             // createUnits
-            for(int i = 0; i < unitsQuantityByTeam; ++i)
+            for (int i = 0; i < unitsQuantityByTeam; ++i)
             {
                 // Instantiate unit
                 GameObject toInstanciate = desc.species.unitsPrefabs[0];

@@ -13,8 +13,9 @@ public class Team : MonoBehaviour
     public List<Unit> units;
     public int unitsCount;
 
-	void Start () {
+    public void Init()
+    {
         units = new List<Unit>();
         unitsCount = 0;
-	}
+    }
 }

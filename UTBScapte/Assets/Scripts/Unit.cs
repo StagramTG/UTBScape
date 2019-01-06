@@ -11,7 +11,7 @@ public class Unit : HexUnit {
     private int damage;
     private bool moved;
 
-    private void Awake()
+    private void Start()
     {
         life = classe.BaseLife + specie.LifeBoost;
         damage = classe.BaseDamage + specie.DamageBoost;
