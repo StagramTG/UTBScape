@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour {
         GameObject otherHandObjectToAttach = GameObject.Instantiate(LongbowItemPackage.otherHandItemPrefab);
         otherHandObjectToAttach.SetActive(true);
         hand.otherHand.AttachObject(otherHandObjectToAttach, GrabTypes.Scripted, attachmentFlags);
+        Menu.SetActive(false);
     }
 
     private void SetCurrentUnit(Unit pUnit)
