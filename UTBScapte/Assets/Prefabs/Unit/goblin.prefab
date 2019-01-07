@@ -324,6 +324,8 @@ GameObject:
   - component: {fileID: 4978546780364400}
   - component: {fileID: 95377894292272850}
   - component: {fileID: 114117163425813580}
+  - component: {fileID: 114143342639983486}
+  - component: {fileID: 65308561982313756}
   m_Layer: 0
   m_Name: goblin
   m_TagString: Untagged
@@ -856,6 +858,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411792069731094}
   m_Mesh: {fileID: 4300004, guid: aee114ff39ebbcf4b91e0aeb8d32722f, type: 3}
+--- !u!65 &65308561982313756
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751857069609518}
+  m_Material: {fileID: 13400000, guid: c509d5711dc2cc346be2763cd92383ca, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.39, y: 5.39, z: 1.82}
+  m_Center: {x: 0, y: 2.73, z: 0}
 --- !u!95 &95377894292272850
 Animator:
   serializedVersion: 3
@@ -887,6 +901,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   classe: {fileID: 11400000, guid: 01c65c1d8496b5643ab8c6774ce94474, type: 2}
   specie: {fileID: 11400000, guid: 7d05dcdb192fdd242b5bfe4eb0dac218, type: 2}
+--- !u!114 &114143342639983486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751857069609518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f2850d002f14a47bff32fdf73df53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114117163425813580}
+        m_MethodName: takeDamage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 200
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onceOnly: 0
+  targetCenter: {fileID: 0}
+  baseTransform: {fileID: 0}
+  fallenDownTransform: {fileID: 0}
+  fallTime: 0.5
 --- !u!137 &137689578849704176
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

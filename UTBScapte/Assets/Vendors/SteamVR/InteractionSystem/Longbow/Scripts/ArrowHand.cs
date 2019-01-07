@@ -27,7 +27,9 @@ namespace Valve.VR.InteractionSystem
 		public float rotationLerpThreshold = 0.15f;
 		public float positionLerpThreshold = 0.15f;
 
-		private bool allowArrowSpawn = true;
+        public int maxArrowNumber = 2;
+
+        private bool allowArrowSpawn = true;
 		private bool nocked;
         private GrabTypes nockedWithType = GrabTypes.None;
 
@@ -98,7 +100,7 @@ namespace Valve.VR.InteractionSystem
 				return;
 			}
 
-			if ( allowArrowSpawn && ( currentArrow == null ) ) // If we're allowed to have an active arrow in hand but don't yet, spawn one
+			if ( allowArrowSpawn && ( currentArrow == null ) &&  maxArrowNumber-- > 0) // If we're allowed to have an active arrow in hand but don't yet, spawn one
 			{
 				currentArrow = InstantiateArrow();
 				arrowSpawnSound.Play();
@@ -173,13 +175,8 @@ namespace Valve.VR.InteractionSystem
                 GrabTypes bestGrab = hand.GetBestGrabbingType(GrabTypes.Pinch, true);
 
                 // If arrow is close enough to the nock position and we're pressing the trigger, and we're not nocked yet, Nock
-                if ( ( distanceToNockPosition < nockDistance ) && bestGrab != GrabTypes.None && !nocked )
+                if ( ( distanceToNockPosition < nockDistance ) && bestGrab != GrabTypes.None && !nocked && currentArrow != null)
 				{
-					if ( currentArrow == null )
-					{
-						currentArrow = InstantiateArrow();
-					}
-
 					nocked = true;
                     nockedWithType = bestGrab;
 					bow.StartNock( this );

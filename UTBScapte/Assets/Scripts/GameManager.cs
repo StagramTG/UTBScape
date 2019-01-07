@@ -7,19 +7,24 @@ using Valve.VR.InteractionSystem;
 public class GameManager : MonoBehaviour {
 
     public MapManager mapManager;
-    //public GameObject cameraVR;
     public Teleport teleport;
     public Unit startUnit;
 
     public TeamManager teamManager;
+
+    public ItemPackage LongbowItemPackage;
+
+    [EnumFlags]
+    public Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags;
 
     public GameObject Menu;
 
     private HexGrid grid;
     private Unit currentUnit;
     private Player player;
+    private Hand hand;
 
-	void Start() {
+    void Start() {
         grid = mapManager.InitMap();
         player = Player.instance;
 
@@ -27,6 +32,7 @@ public class GameManager : MonoBehaviour {
         teamManager.Init();
 
         SetCurrentUnit(teamManager.activeTeam.units[0]);
+        hand = player.leftHand;
     }
 
     private void Update()
@@ -40,17 +46,16 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetButtonDown("EndTurn"))
         {
-            teamManager.nextActiveTeam();
-            SetCurrentUnit(teamManager.activeTeam.getCurrentUnit());
+            EndTurn();
         }
 
         if (Input.GetButtonDown("UnitBefore"))
         {
-            SetCurrentUnit(teamManager.activeTeam.PreviousUnit());
+            PreviousUnit();
         }
         else if (Input.GetButtonDown("UnitAfter"))
         {
-            SetCurrentUnit(teamManager.activeTeam.NextUnit());
+            NextUnit();
         }
 
         if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(player.rightHand.handType)) //Toggle menu
@@ -66,6 +71,33 @@ public class GameManager : MonoBehaviour {
         {
             SetCurrentUnit(teamManager.activeTeam.NextUnit());
         }*/
+    }
+
+    public void EndTurn()
+    {
+        teamManager.nextActiveTeam();
+        SetCurrentUnit(teamManager.activeTeam.getCurrentUnit());
+        Menu.SetActive(false);
+    }
+
+    public void PreviousUnit()
+    {
+        SetCurrentUnit(teamManager.activeTeam.PreviousUnit());
+    }
+
+    public void NextUnit()
+    {
+        SetCurrentUnit(teamManager.activeTeam.NextUnit());
+    }
+
+    public void Action()
+    {
+        GameObject spawnedItem = GameObject.Instantiate(LongbowItemPackage.itemPrefab);
+        spawnedItem.SetActive(true);
+        hand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
+        GameObject otherHandObjectToAttach = GameObject.Instantiate(LongbowItemPackage.otherHandItemPrefab);
+        otherHandObjectToAttach.SetActive(true);
+        hand.otherHand.AttachObject(otherHandObjectToAttach, GrabTypes.Scripted, attachmentFlags);
     }
 
     private void SetCurrentUnit(Unit pUnit)
