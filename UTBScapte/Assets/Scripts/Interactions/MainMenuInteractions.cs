@@ -12,12 +12,17 @@ public class MainMenuInteractions : MonoBehaviour
         Debug.Log("Play pressed !!!");
 
         // Fill data in GameInitData
-        TeamDescriptor desc = new TeamDescriptor();
-        desc.type = Team.Type.PLAYER;
-        desc.species = defaultSpecies;
+        TeamDescriptor descPlayer = new TeamDescriptor();
+        descPlayer.type = Team.Type.PLAYER;
+        descPlayer.species = defaultSpecies;
+
+        TeamDescriptor descAI = new TeamDescriptor();
+        descAI.type = Team.Type.AI;
+        descAI.species = defaultSpecies;
 
         GameInitData.Reset();
-        GameInitData.teamsDescriptions.Add(desc);
+        GameInitData.teamsDescriptions.Add(descPlayer);
+        GameInitData.teamsDescriptions.Add(descAI);
 
         SceneManager.LoadScene(1);
     }

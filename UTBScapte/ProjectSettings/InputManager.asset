@@ -310,7 +310,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: UnitBefore
+    m_Name: PreviousUnit
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -326,7 +326,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: UnitAfter
+    m_Name: NextUnit
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 

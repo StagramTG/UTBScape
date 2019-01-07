@@ -39,7 +39,18 @@ public class TeamManager : MonoBehaviour
             for (int i = 0; i < unitsQuantityByTeam; ++i)
             {
                 // Instantiate unit
-                HexCell cell = grid.GetCell(new HexCoordinates(8 + i, 7));
+                int startX, startY;
+                HexCell cell;
+                //do
+                //{
+                    //startX = Random.Range(1, 13);
+                    //startY = Random.Range(1, 18);
+                    //cell = grid.GetCell(new HexCoordinates(startX, startY));
+                    cell = grid.GetCell(new HexCoordinates(15, 14));
+                    //cell = grid.GetCell(new HexCoordinates(15, 0));
+                    Debug.Log(cell);
+                //} while (cell.IsUnderwater || cell.Unit != null);
+
                 currentTeam.CreateUnit(0, cell);
             }
 
