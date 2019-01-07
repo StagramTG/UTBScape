@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour {
     public Unit startUnit;
 
     public TeamManager teamManager;
+
+    public GameObject Menu;
 
     private HexGrid grid;
     private Unit currentUnit;
@@ -49,6 +52,20 @@ public class GameManager : MonoBehaviour {
         {
             SetCurrentUnit(teamManager.activeTeam.NextUnit());
         }
+
+        if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(player.rightHand.handType)) //Toggle menu
+        {
+            Menu.SetActive(!Menu.activeSelf);
+        }
+
+        /*if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(player.leftHand.handType)) //Select unit before
+        {
+            SetCurrentUnit(teamManager.activeTeam.PreviousUnit());
+        }
+        else if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(player.rightHand.handType)) //Select unit after
+        {
+            SetCurrentUnit(teamManager.activeTeam.NextUnit());
+        }*/
     }
 
     private void SetCurrentUnit(Unit pUnit)
