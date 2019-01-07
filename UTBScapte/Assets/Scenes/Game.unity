@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -350,6 +350,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
   m_IsPrefabAsset: 0
+--- !u!4 &133215422 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 429506, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 2}
+  m_PrefabInternal: {fileID: 133215421}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +666,7 @@ MonoBehaviour:
   LongbowItemPackage: {fileID: 11450054, guid: 98a3ad29136d5c04f8a025adf1cbd704, type: 2}
   attachmentFlags: 233
   Menu: {fileID: 1949546071}
+  actionButton: {fileID: 113466308}
 --- !u!4 &757197081
 Transform:
   m_ObjectHideFlags: 0
@@ -679,7 +685,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1206196668}
+    m_TransformParent: {fileID: 133215422}
     m_Modifications:
     - target: {fileID: 114962261551573648, guid: 879bfc9986a9aa14fa808320737e49ed,
         type: 2}
@@ -709,17 +715,17 @@ Prefab:
     - target: {fileID: 224142725248462262, guid: 879bfc9986a9aa14fa808320737e49ed,
         type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224142725248462262, guid: 879bfc9986a9aa14fa808320737e49ed,
         type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224142725248462262, guid: 879bfc9986a9aa14fa808320737e49ed,
         type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224142725248462262, guid: 879bfc9986a9aa14fa808320737e49ed,
         type: 2}
@@ -1084,11 +1090,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1494392653}
   m_Script: {fileID: 11500000, guid: f260935093f73f241bfaa1578e5e5506, type: 3}
---- !u!4 &1206196668 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 429506, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 2}
-  m_PrefabInternal: {fileID: 133215421}
 --- !u!1 &1214452308
 GameObject:
   m_ObjectHideFlags: 0

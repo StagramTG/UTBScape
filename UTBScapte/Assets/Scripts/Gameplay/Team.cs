@@ -27,9 +27,14 @@ public class Team : MonoBehaviour
         currentUnitIndex = 0;
     }
 
-    public CharacterSpecies getSpecie()
+    public CharacterSpecies GetSpecie()
     {
         return specie;
+    }
+
+    public Type GetTeamType()
+    {
+        return type;
     }
 
     public void CreateUnit(int pPrefabIndex, HexCell cell)
@@ -41,15 +46,6 @@ public class Team : MonoBehaviour
             Unit unit = go.GetComponent<Unit>();
 
             unit.SetTeam(this);
-
-            if (type == Type.PLAYER)
-            {
-                unit.isPlayerUnit = true;
-            }
-            else
-            {
-                unit.isPlayerUnit = false;
-            }
 
             grid.AddUnit(unit, cell, Random.Range(0f, 360f));
 

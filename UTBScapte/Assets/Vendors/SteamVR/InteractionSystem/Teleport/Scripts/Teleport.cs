@@ -259,6 +259,9 @@ namespace Valve.VR.InteractionSystem
 						{
 							TryTeleportPlayer();
 						}
+
+                        teleportPointOpen.gameObject.SetActive(false);
+                        teleportPointClose.gameObject.SetActive(false);
 					}
 				}
 
@@ -830,7 +833,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void PlayPointerHaptic( bool validLocation )
 		{
-			/*if ( pointerHand != null )
+			if ( pointerHand != null )
 			{
 				if ( validLocation )
 				{
@@ -840,7 +843,7 @@ namespace Valve.VR.InteractionSystem
 				{
 					pointerHand.TriggerHapticPulse( 100 );
 				}
-			}*/
+			}
 		}
 
 
@@ -932,16 +935,9 @@ namespace Valve.VR.InteractionSystem
 
                 HexCell dest = grid.GetCell(player.trackingOriginTransform.position);
 
-                currentUnit.Location = dest;
                 // Enlever les unités de déplacement à l'unité
                 currentUnit.Speed = currentUnit.Speed - dest.Distance;
-                Debug.Log("Speed ! : " + currentUnit.Speed + " dist parcourue : " + dest.Distance);
-
-                if (currentUnit.Speed <= 0)
-                {
-                    currentUnit.setMoved(true);
-                    gameObject.SetActive(false);
-                }
+                currentUnit.Location = dest;
             }
 			else
 			{

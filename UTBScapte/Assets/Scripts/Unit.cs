@@ -7,21 +7,25 @@ public class Unit : HexUnit {
     public CharacterClasses classe;
     public CharacterSpecies specie;
 
+    public bool actionPossible = true;
+
     private int life;
     private int damage;
-    private bool moved;
     private Team team;
 
     private void Start()
     {
         life = classe.BaseLife + specie.LifeBoost;
         damage = classe.BaseDamage + specie.DamageBoost;
-        moved = false;
     }
 
     public void SetTeam(Team pTeam)
     {
         this.team = pTeam;
+        isPlayerUnit = team.GetTeamType() == Team.Type.PLAYER;
+
+        if (!isPlayerUnit)
+            gameObject.SetActive(false);
     }
 
     public void takeDamage(int pDamage)
@@ -38,15 +42,5 @@ public class Unit : HexUnit {
     public int getDamage()
     {
         return this.damage;
-    }
-
-    public bool getMoved()
-    {
-        return moved;
-    }
-
-    public void setMoved(bool pMoved)
-    {
-        moved = pMoved;
     }
 }

@@ -70,8 +70,8 @@ public class TeamManager : MonoBehaviour
         //Reset movement for all units
         foreach(Unit unit in activeTeam.units)
         {
-            unit.setMoved(false);
             unit.ResetSpeed();
+            unit.actionPossible = true;
         }
     }
 
