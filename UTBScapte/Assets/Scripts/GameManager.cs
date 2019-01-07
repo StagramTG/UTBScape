@@ -24,18 +24,15 @@ public class GameManager : MonoBehaviour {
     private Player player;
     private Hand hand;
 
-    private void Awake()
-    {
+    void Start() {
         grid = mapManager.InitMap();
         player = Player.instance;
-    }
 
-    void Start() {
         // Init all teams with members and turn index
         teamManager.Init();
 
         SetCurrentUnit(teamManager.activeTeam.units[0]);
-        //hand = player.leftHand;
+        hand = player.leftHand;
     }
 
     private void Update()
@@ -61,10 +58,10 @@ public class GameManager : MonoBehaviour {
             NextUnit();
         }
 
-        /*if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(player.rightHand.handType)) //Toggle menu
+        if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(player.rightHand.handType)) //Toggle menu
         {
             Menu.SetActive(!Menu.activeSelf);
-        }*/
+        }
     }
 
     public void EndTurn()
@@ -101,7 +98,7 @@ public class GameManager : MonoBehaviour {
             currentUnit.gameObject.SetActive(true);
 
         currentUnit = pUnit;
-        //currentUnit.gameObject.SetActive(false);
+        currentUnit.gameObject.SetActive(false);
         teleport.setCurrentUnit(currentUnit);
 
         //Check if the unit have already moved

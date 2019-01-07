@@ -162,6 +162,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114979729553395678, guid: 879bfc9986a9aa14fa808320737e49ed,
+        type: 2}
+      propertyPath: species.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224142725248462262, guid: 879bfc9986a9aa14fa808320737e49ed,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -261,6 +266,18 @@ Prefab:
       propertyPath: defaultSpecies
       value: 
       objectReference: {fileID: 11400000, guid: 7d05dcdb192fdd242b5bfe4eb0dac218,
+        type: 2}
+    - target: {fileID: 114979729553395678, guid: 879bfc9986a9aa14fa808320737e49ed,
+        type: 2}
+      propertyPath: species.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7d05dcdb192fdd242b5bfe4eb0dac218,
+        type: 2}
+    - target: {fileID: 114979729553395678, guid: 879bfc9986a9aa14fa808320737e49ed,
+        type: 2}
+      propertyPath: species.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f00f7c05531cd6d48bb583acdb17e745,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 879bfc9986a9aa14fa808320737e49ed, type: 2}

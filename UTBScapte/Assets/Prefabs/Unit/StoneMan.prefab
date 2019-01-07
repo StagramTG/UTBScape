@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33783695331380918}
   - component: {fileID: 23714676635951444}
   - component: {fileID: 114690866498778470}
+  - component: {fileID: 114303282264314640}
+  - component: {fileID: 65874741674692438}
   m_Layer: 0
   m_Name: StoneMan
   m_TagString: Untagged
@@ -86,6 +88,50 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1187632001932396}
   m_Mesh: {fileID: 4300000, guid: 0867fcf094dcd6848af019865ed8b531, type: 3}
+--- !u!65 &65874741674692438
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1187632001932396}
+  m_Material: {fileID: 13400000, guid: c509d5711dc2cc346be2763cd92383ca, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8, y: 2.5735471, z: 1.59}
+  m_Center: {x: 0, y: 1.2867736, z: 0.022807807}
+--- !u!114 &114303282264314640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1187632001932396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f2850d002f14a47bff32fdf73df53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114690866498778470}
+        m_MethodName: takeDamage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 50
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onceOnly: 0
+  targetCenter: {fileID: 0}
+  baseTransform: {fileID: 0}
+  fallenDownTransform: {fileID: 0}
+  fallTime: 0.5
 --- !u!114 &114690866498778470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,5 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e763ad1f3949ef4d972faf5ff475fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayerUnit: 0
   classe: {fileID: 11400000, guid: 01c65c1d8496b5643ab8c6774ce94474, type: 2}
   specie: {fileID: 11400000, guid: f00f7c05531cd6d48bb583acdb17e745, type: 2}

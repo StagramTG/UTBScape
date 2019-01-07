@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuInteractions : MonoBehaviour
 {
-    public CharacterSpecies defaultSpecies;
+    public List<CharacterSpecies> species;
 
     public void PlayButtonPressed()
     {
@@ -14,11 +14,11 @@ public class MainMenuInteractions : MonoBehaviour
         // Fill data in GameInitData
         TeamDescriptor descPlayer = new TeamDescriptor();
         descPlayer.type = Team.Type.PLAYER;
-        descPlayer.species = defaultSpecies;
+        descPlayer.species = species[0];
 
         TeamDescriptor descAI = new TeamDescriptor();
         descAI.type = Team.Type.AI;
-        descAI.species = defaultSpecies;
+        descAI.species = species[1];
 
         GameInitData.Reset();
         GameInitData.teamsDescriptions.Add(descPlayer);

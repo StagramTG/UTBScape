@@ -11,12 +11,10 @@ public class HexGrid : MonoBehaviour {
 	public HexCell cellPrefab;
 	public Text cellLabelPrefab;
 	public HexGridChunk chunkPrefab;
-	//public HexUnit unitPrefab;
 
 	public Texture2D noiseSource;
 
 	public int seed;
-
 	public bool HasPath {
 		get {
 			return currentPathExists;
@@ -390,20 +388,28 @@ public class HexGrid : MonoBehaviour {
 		return false;
 	}
 
-	public void IncreaseVisibility (HexCell fromCell, int range) {
-		List<HexCell> cells = GetVisibleCells(fromCell, range);
-		for (int i = 0; i < cells.Count; i++) {
-			cells[i].IncreaseVisibility();
-		}
-		ListPool<HexCell>.Add(cells);
+	public void IncreaseVisibility (HexCell fromCell, int range, bool isPlayerUnit) {
+        if (isPlayerUnit)
+        {
+            List<HexCell> cells = GetVisibleCells(fromCell, range);
+            for (int i = 0; i < cells.Count; i++)
+            {
+                cells[i].IncreaseVisibility();
+            }
+            ListPool<HexCell>.Add(cells);
+        }
 	}
 
-	public void DecreaseVisibility (HexCell fromCell, int range) {
-		List<HexCell> cells = GetVisibleCells(fromCell, range);
-		for (int i = 0; i < cells.Count; i++) {
-			cells[i].DecreaseVisibility();
-		}
-		ListPool<HexCell>.Add(cells);
+	public void DecreaseVisibility (HexCell fromCell, int range, bool isPlayerUnit) {
+        if (isPlayerUnit)
+        {
+            List<HexCell> cells = GetVisibleCells(fromCell, range);
+            for (int i = 0; i < cells.Count; i++)
+            {
+                cells[i].DecreaseVisibility();
+            }
+            ListPool<HexCell>.Add(cells);
+        }
 	}
 
 	public void ResetVisibility () {
@@ -412,7 +418,7 @@ public class HexGrid : MonoBehaviour {
 		}
 		for (int i = 0; i < units.Count; i++) {
 			HexUnit unit = units[i];
-			IncreaseVisibility(unit.Location, unit.VisionRange);
+			IncreaseVisibility(unit.Location, unit.VisionRange, unit.isPlayerUnit);
 		}
 	}
 

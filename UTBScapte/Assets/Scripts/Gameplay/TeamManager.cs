@@ -41,15 +41,12 @@ public class TeamManager : MonoBehaviour
                 // Instantiate unit
                 int startX, startY;
                 HexCell cell;
-                //do
-                //{
-                    //startX = Random.Range(1, 13);
-                    //startY = Random.Range(1, 18);
-                    //cell = grid.GetCell(new HexCoordinates(startX, startY));
-                    cell = grid.GetCell(new HexCoordinates(15, 14));
-                    //cell = grid.GetCell(new HexCoordinates(15, 0));
-                    Debug.Log(cell);
-                //} while (cell.IsUnderwater || cell.Unit != null);
+                do
+                {
+                    startX = Random.Range(1, 18);
+                    startY = Random.Range(1, 13);
+                    cell = grid.GetCell(HexCoordinates.FromOffsetCoordinates(startX, startY));
+                } while (cell.IsUnderwater || cell.Unit != null);
 
                 currentTeam.CreateUnit(0, cell);
             }

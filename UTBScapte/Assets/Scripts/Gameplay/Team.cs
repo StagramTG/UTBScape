@@ -44,14 +44,14 @@ public class Team : MonoBehaviour
 
             if (type == Type.PLAYER)
             {
-                // Add unit to grid
-                grid.AddUnit(unit, cell, Random.Range(0f, 360f));
+                unit.isPlayerUnit = true;
             }
             else
             {
-                go.transform.position = cell.transform.position;
-                go.transform.SetParent(this.gameObject.transform, false);
+                unit.isPlayerUnit = false;
             }
+
+            grid.AddUnit(unit, cell, Random.Range(0f, 360f));
 
             // Add instiated unit to team
             units.Add(unit);
