@@ -39,11 +39,23 @@ public class HexUnit : MonoBehaviour {
 		}
 	}
 
-	public int Speed {
-		get {
-			return 24;
-		}
-	}
+    private int speed = 24;
+    public int Speed
+    {
+        get
+        {
+            return speed;
+        }
+        set
+        {
+            speed = value;
+        }
+    }
+
+    public void ResetSpeed()
+    {
+        speed = 24;
+    }
 
 	public int VisionRange {
 		get {

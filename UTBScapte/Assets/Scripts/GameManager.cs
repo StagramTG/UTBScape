@@ -36,28 +36,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update()
-    {
-        if (Input.GetButtonDown("Submit"))
-        {
-            currentUnit.Location = grid.GetCell(player.trackingOriginTransform.position);
-            currentUnit.setMoved(true);
-            teleport.gameObject.SetActive(false);
-        }
-
-        if (Input.GetButtonDown("EndTurn"))
-        {
-            EndTurn();
-        }
-
-        if (Input.GetButtonDown("PreviousUnit"))
-        {
-            PreviousUnit();
-        }
-        else if (Input.GetButtonDown("NextUnit"))
-        {
-            NextUnit();
-        }
-
+    {   
         if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(player.rightHand.handType)) //Toggle menu
         {
             Menu.SetActive(!Menu.activeSelf);

@@ -118,7 +118,7 @@ namespace Valve.VR.InteractionSystem
 		SteamVR_Events.Action chaperoneInfoInitializedAction;
 
         private HexCell pointingCell;
-        private HexUnit currentUnit;
+        private Unit currentUnit;
 
 		// Events
 
@@ -146,7 +146,7 @@ namespace Valve.VR.InteractionSystem
 			}
 		}
 
-        public void setCurrentUnit(HexUnit unit)
+        public void setCurrentUnit(Unit unit)
         {
             this.currentUnit = unit;
         }
@@ -929,7 +929,20 @@ namespace Valve.VR.InteractionSystem
 				Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
 				player.trackingOriginTransform.position = teleportPosition + playerFeetOffset;
                 teleportPointOpen.Highlight(false);
-			}
+
+                HexCell dest = grid.GetCell(player.trackingOriginTransform.position);
+
+                currentUnit.Location = dest;
+                // Enlever les unités de déplacement à l'unité
+                currentUnit.Speed = currentUnit.Speed - dest.Distance;
+                Debug.Log("Speed ! : " + currentUnit.Speed + " dist parcourue : " + dest.Distance);
+
+                if (currentUnit.Speed <= 0)
+                {
+                    currentUnit.setMoved(true);
+                    gameObject.SetActive(false);
+                }
+            }
 			else
 			{
 				teleportingToMarker.TeleportPlayer( pointedAtPosition );

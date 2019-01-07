@@ -71,6 +71,7 @@ public class TeamManager : MonoBehaviour
         foreach(Unit unit in activeTeam.units)
         {
             unit.setMoved(false);
+            unit.ResetSpeed();
         }
     }
 
