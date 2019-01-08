@@ -37,7 +37,7 @@ public class Team : MonoBehaviour
         return type;
     }
 
-    public void CreateUnit(int pPrefabIndex, HexCell cell)
+    public void CreateUnit(int pPrefabIndex, CharacterClasses pclasse, HexCell cell)
     {
         if (pPrefabIndex < specie.unitsPrefabs.Count)
         {
@@ -45,6 +45,8 @@ public class Team : MonoBehaviour
             GameObject go = Instantiate(toInstanciate);
             Unit unit = go.GetComponent<Unit>();
 
+            unit.classe = pclasse;
+            unit.Init();
             unit.SetTeam(this);
 
             grid.AddUnit(unit, cell, Random.Range(0f, 360f));

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -664,9 +664,13 @@ MonoBehaviour:
     type: 2}
   teamManager: {fileID: 947002631}
   LongbowItemPackage: {fileID: 11450054, guid: 98a3ad29136d5c04f8a025adf1cbd704, type: 2}
+  Sword: {fileID: 114517577762043214, guid: 64ffc9dc40923d241afc53807338fa40, type: 2}
   attachmentFlags: 233
   Menu: {fileID: 1949546071}
   actionButton: {fileID: 113466308}
+  Classes:
+  - {fileID: 11400000, guid: 8b7f4f6c2814d3142ac5fd05167d64ca, type: 2}
+  - {fileID: 11400000, guid: 01c65c1d8496b5643ab8c6774ce94474, type: 2}
 --- !u!4 &757197081
 Transform:
   m_ObjectHideFlags: 0

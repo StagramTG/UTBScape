@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0065ceeeab944dd42b1d254864f176f7, type: 3}
-  m_Name: Warrior
+  m_Name: Archer
   m_EditorClassIdentifier: 
-  Name: 1
-  BaseLife: 125
-  BaseDamage: 12
+  Name: 2
+  BaseLife: 100
+  BaseDamage: 10
