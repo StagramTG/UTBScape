@@ -48,7 +48,7 @@ public class TeamManager : MonoBehaviour
                     cell = grid.GetCell(HexCoordinates.FromOffsetCoordinates(startX, startY));
                 } while (cell.IsUnderwater || cell.Unit != null);
 
-                currentTeam.CreateUnit(0, pclasses[Random.Range(0, pclasses.Count - 1)], cell);
+                currentTeam.CreateUnit(0, pclasses[Random.Range(0, pclasses.Count)], cell);
             }
 
             // Add newly created team to manager list

@@ -8,15 +8,24 @@ public class Sword : MonoBehaviour {
 
     public Unit unit;
 
-    private CellChooser cellChooser;
+    public GameObject cellChooser;
 
     private void Start()
     {
-        cellChooser = gameObject.AddComponent<CellChooser>();
+        cellChooser = Instantiate(cellChooser, unit.transform.position + Vector3.up, Quaternion.identity, null);
     }
 
     private void OnDetachedFromHand(Hand hand)
     {
+        Destroy(cellChooser);
         Destroy(gameObject);
+    }
+
+    public void DirectionChoosed(HexDirection dir)
+    {
+        cellChooser.SetActive(false);
+        HexCell cell = unit.Location.GetNeighbor(dir);
+        if (cell != null && cell.Unit != null)
+            cell.Unit.TakeDamage(unit.getDamage());
     }
 }

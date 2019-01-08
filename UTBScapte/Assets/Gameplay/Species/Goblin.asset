@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Goblin
   LifeBoost: 0
-  DamageBoost: 1
+  DamageBoost: 5
   unitsPrefabs:
   - {fileID: 1751857069609518, guid: 7db32259a2349fb4f8a9a04669a621dd, type: 2}

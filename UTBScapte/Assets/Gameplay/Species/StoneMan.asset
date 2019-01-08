@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Stone Man
   LifeBoost: 10
-  DamageBoost: 2
+  DamageBoost: 0
   unitsPrefabs:
   - {fileID: 1187632001932396, guid: c95fbdc1e58a7c147a9e4a1883707806, type: 2}

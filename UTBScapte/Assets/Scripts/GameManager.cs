@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour {
         {
             EndTurn();
         }
+
+        if (Input.GetButtonDown("Sword"))
+        {
+            SetupWarriorAction();
+        }
     }
 
     public void EndTurn()
@@ -112,9 +117,12 @@ public class GameManager : MonoBehaviour {
     {
         GameObject spawnedItem = GameObject.Instantiate(Sword.itemPrefab);
         spawnedItem.SetActive(true);
-        hand.otherHand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
+        //hand.otherHand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
 
         instantiatedWeapon = spawnedItem;
+
+        //Only for debug without HTC
+        //instantiatedWeapon.transform.position = player.trackingOriginTransform.position;
 
         spawnedItem.GetComponent<Sword>().unit = currentUnit;
     }

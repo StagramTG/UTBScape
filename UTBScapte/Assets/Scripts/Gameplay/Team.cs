@@ -89,16 +89,16 @@ public class Team : MonoBehaviour
                 bool cac = UnitCAC(unit, visible[0]);
                 if (unit.classe.Name == ClasseTypes.ARCHER)
                 {
-                    visible[0].takeDamage(unit.getDamage());
+                    ArcherAttaque(unit, visible[0]);
                     if (cac)
                         MoveOpposite(unit, visible[0]);
                 }
                 else
                 {
                     if (cac)
-                        visible[0].takeDamage(unit.getDamage());
+                        visible[0].TakeDamage(unit.getDamage());
                     else
-                        MoveRandomly(unit);
+                        GoToCAC(unit, visible[0]);
                 }
             }
             else
@@ -106,17 +106,62 @@ public class Team : MonoBehaviour
         }
     }
 
+    private void ArcherAttaque(Unit pUnit, Unit pTarget)
+    {
+        if (Random.Range(0, 100) > 80)// First arrow
+            pTarget.ReceivedArrow();
+
+        if (Random.Range(0, 100) > 80)// Second arrow
+            pTarget.ReceivedArrow();
+    }
+
+    private void GoToCAC(Unit pUnit, Unit pTarget)
+    {
+        int minDistance = int.MaxValue;
+        HexCell cell = null;
+        for (HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+        {
+            HexCell tempCell = pTarget.Location.GetNeighbor(dir);
+            if (EmptyCell(tempCell))
+            {
+                pUnit.Grid.FindPath(pUnit.Location, tempCell, pUnit);
+                if (tempCell.Distance < minDistance)
+                {
+                    cell = tempCell;
+                    minDistance = tempCell.Distance;
+                }
+            }
+        }
+        pUnit.Grid.FindPath(pUnit.Location, cell, pUnit);
+        if ((cell.Distance - 1) / pUnit.Speed > 0)
+        {
+            List<HexCell> path = pUnit.Grid.GetPath();
+            int i = 0;
+
+            while((path[i].Distance - 1) / pUnit.Speed <= 0)
+            {
+                ++i;
+            }
+            --i;
+            Move(pUnit, path[i]);
+        }
+        else
+        {
+            Move(pUnit, cell);
+            pTarget.TakeDamage(pUnit.getDamage());
+        }
+    }
+
     private void MoveRandomly(Unit currentUnit)
     {
-        List<HexCell> neighbours = new List<HexCell>();
-        neighbours.Add(currentUnit.Location);
+        List<HexCell> neighbors = new List<HexCell>();
+        neighbors.Add(currentUnit.Location);
         for (HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
         {
             if (currentUnit.Location.GetNeighbor(dir) != null && EmptyCell(currentUnit.Location.GetNeighbor(dir)))
-                neighbours.Add(currentUnit.Location.GetNeighbor(dir));
+                neighbors.Add(currentUnit.Location.GetNeighbor(dir));
         }
-
-        HexCell dest = neighbours[Random.Range(0, neighbours.Count - 1)];
+        HexCell dest = neighbors[Random.Range(0, neighbors.Count)];
         Move(currentUnit, dest);
     }
 

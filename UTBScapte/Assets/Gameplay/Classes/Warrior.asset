@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 1
   BaseLife: 125
-  BaseDamage: 12
+  BaseDamage: 25

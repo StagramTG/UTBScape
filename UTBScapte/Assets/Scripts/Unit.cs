@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Unit : HexUnit {
 
+    public const int ARROWDAMAGE = 15;
+
     public CharacterClasses classe;
     public CharacterSpecies specie;
 
@@ -65,7 +67,7 @@ public class Unit : HexUnit {
             gameObject.SetActive(false);
     }
 
-    public void takeDamage(int pDamage)
+    public void TakeDamage(int pDamage)
     {
         life -= pDamage;
 
@@ -78,6 +80,11 @@ public class Unit : HexUnit {
             team = null;
             this.Die();
         }
+    }
+
+    public void ReceivedArrow()
+    {
+        this.TakeDamage(ARROWDAMAGE);
     }
 
     public int getDamage()
