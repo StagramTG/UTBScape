@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour {
         hand.otherHand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
 
         instantiatedWeapon = spawnedItem;
+
+        // Choose cell to attack
     }
 
     private void SetCurrentUnit(Unit pUnit)
