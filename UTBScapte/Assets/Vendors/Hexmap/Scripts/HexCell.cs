@@ -304,6 +304,8 @@ public class HexCell : MonoBehaviour {
 	public void IncreaseVisibility () {
 		visibility += 1;
 		if (visibility == 1) {
+            if (Unit != null && !Unit.isPlayerUnit)
+                Unit.gameObject.SetActive(true);
 			IsExplored = true;
 			ShaderData.RefreshVisibility(this);
 		}
@@ -312,7 +314,9 @@ public class HexCell : MonoBehaviour {
 	public void DecreaseVisibility () {
 		visibility -= 1;
 		if (visibility == 0) {
-			ShaderData.RefreshVisibility(this);
+            if (Unit != null && !Unit.isPlayerUnit)
+                Unit.gameObject.SetActive(false);
+            ShaderData.RefreshVisibility(this);
 		}
 	}
 

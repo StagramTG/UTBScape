@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags;
 
     public GameObject Menu;
+    public Button actionButton;
 
     private HexGrid grid;
     private Unit currentUnit;
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour {
 
     public void Action()
     {
+        actionButton.interactable = false;
+
         GameObject spawnedItem = GameObject.Instantiate(LongbowItemPackage.itemPrefab);
         spawnedItem.SetActive(true);
         hand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
@@ -81,14 +85,42 @@ public class GameManager : MonoBehaviour {
         currentUnit.gameObject.SetActive(false);
         teleport.setCurrentUnit(currentUnit);
 
-        //Check if the unit have already moved
-        if (currentUnit.getMoved())
-            teleport.gameObject.SetActive(false);
-        else
-            teleport.gameObject.SetActive(true);
-
         //Place player at the right position
         Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
         player.trackingOriginTransform.position = pUnit.Location.transform.position + playerFeetOffset;
+
+        actionButton.interactable = currentUnit.actionPossible;
+
+        /*if (itemPackage.packageType == ItemPackage.ItemPackageType.OneHanded)
+        {
+            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand);
+            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
+            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
+        }
+
+        // if we're trying to spawn a two-handed item, remove one and two-handed items from both hands
+        if (itemPackage.packageType == ItemPackage.ItemPackageType.TwoHanded)
+        {*/
+            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand);
+            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand.otherHand);
+            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
+            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
+        //}
+    }
+
+    private void RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType packageType, Hand hand)
+    {
+        for (int i = 0; i < hand.AttachedObjects.Count; i++)
+        {
+            ItemPackageReference packageReference = hand.AttachedObjects[i].attachedObject.GetComponent<ItemPackageReference>();
+            if (packageReference != null)
+            {
+                if (packageReference.itemPackage.packageType == packageType)
+                {
+                    GameObject detachedItem = hand.AttachedObjects[i].attachedObject;
+                    hand.DetachObject(detachedItem);
+                }
+            }
+        }
     }
 }
