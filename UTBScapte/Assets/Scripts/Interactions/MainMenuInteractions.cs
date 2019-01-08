@@ -32,9 +32,4 @@ public class MainMenuInteractions : MonoBehaviour
         Debug.Log("Quit pressed !!!");
         Application.Quit();
     }
-
-    private void Start()
-    {
-        PlayButtonPressed();
-    }
 }
