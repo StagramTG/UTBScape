@@ -16,7 +16,9 @@ ModelImporter:
     2100002: handleup
     2100004: base
     2300000: Cube
+    2300002: //RootNode
     3300000: Cube
+    3300002: //RootNode
     4300000: Cube
     10800000: Light
   externalObjects: {}
