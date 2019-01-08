@@ -25,6 +25,10 @@ public class Unit : HexUnit {
 
     private void Start()
     {
+    }
+
+    public void Init()
+    {
         life = classe.BaseLife + specie.LifeBoost;
         maxLife = life;
         damage = classe.BaseDamage + specie.DamageBoost;

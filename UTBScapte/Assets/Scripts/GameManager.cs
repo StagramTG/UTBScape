@@ -13,7 +13,11 @@ public class GameManager : MonoBehaviour {
 
     public TeamManager teamManager;
 
+    /*
+     * WEAPONS
+     */
     public ItemPackage LongbowItemPackage;
+    public ItemPackage Sword;
 
     [EnumFlags]
     public Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags;
@@ -26,12 +30,19 @@ public class GameManager : MonoBehaviour {
     private Player player;
     private Hand hand;
 
+    private GameObject instantiatedWeapon;
+
+    /*
+     * Classes
+     */
+    public List<CharacterClasses> Classes;
+
     void Start() {
         grid = mapManager.InitMap();
         player = Player.instance;
 
         // Init all teams with members and turn index
-        teamManager.Init();
+        teamManager.Init(Classes);
 
         SetCurrentUnit(teamManager.activeTeam.units[0]);
         hand = player.leftHand;
@@ -64,22 +75,62 @@ public class GameManager : MonoBehaviour {
 
     public void Action()
     {
-        actionButton.interactable = false;
 
+        actionButton.interactable = false;
+        currentUnit.actionPossible = false;
+        
+        switch(currentUnit.classe.Name)
+        {
+            case ClasseTypes.ARCHER:
+                SetupArcherAction();
+                break;
+
+            case ClasseTypes.WARRIOR:
+                SetupWarriorAction();
+                break;
+        }
+
+        Menu.SetActive(false);
+    }
+
+    private void SetupArcherAction()
+    {
         GameObject spawnedItem = GameObject.Instantiate(LongbowItemPackage.itemPrefab);
         spawnedItem.SetActive(true);
         hand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
         GameObject otherHandObjectToAttach = GameObject.Instantiate(LongbowItemPackage.otherHandItemPrefab);
         otherHandObjectToAttach.SetActive(true);
         hand.otherHand.AttachObject(otherHandObjectToAttach, GrabTypes.Scripted, attachmentFlags);
-        Menu.SetActive(false);
+    }
+
+    private void SetupWarriorAction()
+    {
+        GameObject spawnedItem = GameObject.Instantiate(Sword.itemPrefab);
+        spawnedItem.SetActive(true);
+        hand.otherHand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
+
+        instantiatedWeapon = spawnedItem;
     }
 
     private void SetCurrentUnit(Unit pUnit)
     {
         //Reactivate the previous unit
         if (currentUnit != null)
+        {
             currentUnit.gameObject.SetActive(true);
+
+            // Unamred unit
+            switch (currentUnit.classe.Name)
+            {
+                case ClasseTypes.ARCHER:
+                    UnarmedArcher();
+                    break;
+
+                case ClasseTypes.WARRIOR:
+                    UnarmedWarrior();
+                    break;
+            }
+        }
 
         currentUnit = pUnit;
         currentUnit.gameObject.SetActive(false);
@@ -100,12 +151,31 @@ public class GameManager : MonoBehaviour {
 
         // if we're trying to spawn a two-handed item, remove one and two-handed items from both hands
         if (itemPackage.packageType == ItemPackage.ItemPackageType.TwoHanded)
-        {*/
+        {
             RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand);
             RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand.otherHand);
             RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
             RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
-        //}
+        }*/
+    }
+
+    public void UnarmedArcher()
+    {
+        RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand);
+        RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand.otherHand);
+        RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
+        RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
+    }
+
+    public void UnarmedWarrior()
+    {
+        RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand);
+        RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand.otherHand);
+        RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
+        RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
+
+        Destroy(instantiatedWeapon);
+        instantiatedWeapon = null;
     }
 
     private void RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType packageType, Hand hand)

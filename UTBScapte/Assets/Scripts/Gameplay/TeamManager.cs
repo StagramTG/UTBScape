@@ -25,7 +25,7 @@ public class TeamManager : MonoBehaviour
         activeTeamTurnIndex = 0;
 	}
 
-    public void Init()
+    public void Init(List<CharacterClasses> pclasses)
     {
         // Init all teams by using data feed "GameInitData" (Static class)
         foreach(TeamDescriptor desc in GameInitData.teamsDescriptions)
@@ -34,6 +34,8 @@ public class TeamManager : MonoBehaviour
             GameObject currentTeamGO = Instantiate(teamPrefab);
             Team currentTeam = currentTeamGO.GetComponent<Team>();
             currentTeam.Init(grid, desc.species, desc.type);
+
+            System.Random rand = new System.Random();
 
             // createUnits
             for (int i = 0; i < unitsQuantityByTeam; ++i)
@@ -48,7 +50,7 @@ public class TeamManager : MonoBehaviour
                     cell = grid.GetCell(HexCoordinates.FromOffsetCoordinates(startX, startY));
                 } while (cell.IsUnderwater || cell.Unit != null);
 
-                currentTeam.CreateUnit(0, cell);
+                currentTeam.CreateUnit(0, pclasses[rand.Next(pclasses.Count)], cell);
             }
 
             // Add newly created team to manager list
