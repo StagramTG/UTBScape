@@ -49,10 +49,15 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update()
-    {   
+    {
         if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(player.rightHand.handType)) //Toggle menu
         {
             Menu.SetActive(!Menu.activeSelf);
+        }
+
+        if (Input.GetButtonDown("Submit"))
+        {
+            EndTurn();
         }
     }
 
@@ -143,22 +148,6 @@ public class GameManager : MonoBehaviour {
         player.trackingOriginTransform.position = pUnit.Location.transform.position + playerFeetOffset;
 
         actionButton.interactable = currentUnit.actionPossible;
-
-        /*if (itemPackage.packageType == ItemPackage.ItemPackageType.OneHanded)
-        {
-            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand);
-            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
-            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
-        }
-
-        // if we're trying to spawn a two-handed item, remove one and two-handed items from both hands
-        if (itemPackage.packageType == ItemPackage.ItemPackageType.TwoHanded)
-        {
-            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand);
-            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.OneHanded, hand.otherHand);
-            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
-            RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
-        }*/
     }
 
     public void UnarmedArcher()

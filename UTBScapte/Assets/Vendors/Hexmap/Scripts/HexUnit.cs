@@ -11,23 +11,7 @@ public class HexUnit : MonoBehaviour {
 
 	public HexGrid Grid { get; set; }
 
-	public HexCell Location {
-		get {
-			return location;
-		}
-		set {
-			if (location) {
-				Grid.DecreaseVisibility(location, VisionRange, isPlayerUnit);
-				location.Unit = null;
-			}
-			location = value;
-			value.Unit = this;
-			Grid.IncreaseVisibility(value, VisionRange, isPlayerUnit);
-			transform.localPosition = value.Position;
-		}
-	}
-
-	HexCell location, currentTravelLocation;
+	protected HexCell location, currentTravelLocation;
 
 	public float Orientation {
 		get {
@@ -75,14 +59,14 @@ public class HexUnit : MonoBehaviour {
 		return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
 	}
 
-	public void Travel (List<HexCell> path) {
+	/*public void Travel (List<HexCell> path) {
 		location.Unit = null;
 		location = path[path.Count - 1];
 		location.Unit = this;
 		pathToTravel = path;
 		StopAllCoroutines();
 		StartCoroutine(TravelPath());
-	}
+	}*/
 
 	IEnumerator TravelPath () {
 		Vector3 a, b, c = pathToTravel[0].Position;

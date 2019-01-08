@@ -23,9 +23,26 @@ public class Unit : HexUnit {
 
     private float lastUpdate = 0;
 
-    private void Start()
+    public HexCell Location
     {
+        get
+        {
+            return location;
+        }
+        set
+        {
+            if (location)
+            {
+                Grid.DecreaseVisibility(location, VisionRange, isPlayerUnit);
+                location.Unit = null;
+            }
+            location = value;
+            value.Unit = this;
+            Grid.IncreaseVisibility(value, VisionRange, isPlayerUnit);
+            transform.localPosition = value.Position;
+        }
     }
+
 
     public void Init()
     {

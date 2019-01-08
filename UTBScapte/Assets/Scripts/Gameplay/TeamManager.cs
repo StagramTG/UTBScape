@@ -35,8 +35,6 @@ public class TeamManager : MonoBehaviour
             Team currentTeam = currentTeamGO.GetComponent<Team>();
             currentTeam.Init(grid, desc.species, desc.type);
 
-            System.Random rand = new System.Random();
-
             // createUnits
             for (int i = 0; i < unitsQuantityByTeam; ++i)
             {
@@ -50,7 +48,7 @@ public class TeamManager : MonoBehaviour
                     cell = grid.GetCell(HexCoordinates.FromOffsetCoordinates(startX, startY));
                 } while (cell.IsUnderwater || cell.Unit != null);
 
-                currentTeam.CreateUnit(0, pclasses[rand.Next(pclasses.Count)], cell);
+                currentTeam.CreateUnit(0, pclasses[Random.Range(0, pclasses.Count - 1)], cell);
             }
 
             // Add newly created team to manager list
@@ -70,10 +68,16 @@ public class TeamManager : MonoBehaviour
         activeTeam = teams[pindex];
 
         //Reset movement for all units
-        foreach(Unit unit in activeTeam.units)
+        foreach (Unit unit in activeTeam.units)
         {
             unit.ResetSpeed();
             unit.actionPossible = true;
+        }
+
+        if (activeTeam.GetTeamType() == Team.Type.AI)
+        {
+            activeTeam.AIInterraction();
+            nextActiveTeam();
         }
     }
 

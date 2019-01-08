@@ -78,4 +78,117 @@ public class Team : MonoBehaviour
 
         return units[currentUnitIndex];
     }
+
+    public void AIInterraction()
+    {
+        foreach (Unit unit in units)
+        {
+            List<Unit> visible = VisibleUnit(unit);
+            if (visible.Count > 0)
+            {
+                bool cac = UnitCAC(unit, visible[0]);
+                if (unit.classe.Name == ClasseTypes.ARCHER)
+                {
+                    visible[0].takeDamage(unit.getDamage());
+                    if (cac)
+                        MoveOpposite(unit, visible[0]);
+                }
+                else
+                {
+                    if (cac)
+                        visible[0].takeDamage(unit.getDamage());
+                    else
+                        MoveRandomly(unit);
+                }
+            }
+            else
+                MoveRandomly(unit);
+        }
+    }
+
+    private void MoveRandomly(Unit currentUnit)
+    {
+        List<HexCell> neighbours = new List<HexCell>();
+        neighbours.Add(currentUnit.Location);
+        for (HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+        {
+            if (currentUnit.Location.GetNeighbor(dir) != null && EmptyCell(currentUnit.Location.GetNeighbor(dir)))
+                neighbours.Add(currentUnit.Location.GetNeighbor(dir));
+        }
+
+        HexCell dest = neighbours[Random.Range(0, neighbours.Count - 1)];
+        Move(currentUnit, dest);
+    }
+
+    private void Move(Unit pUnit, HexCell pDest)
+    {
+        pUnit.Location = pDest;
+
+        if (!pDest.IsVisible)
+            pUnit.gameObject.SetActive(false);
+        else
+            pUnit.gameObject.SetActive(true);
+    }
+
+    private bool UnitCAC(Unit pUnit1, Unit pUnit2)
+    {
+        for (HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+        {
+            HexCell neighbor = pUnit1.Location.GetNeighbor(dir);
+            if (neighbor != null)
+            {
+                if (neighbor.Unit != null && neighbor.Unit == pUnit2)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private void MoveOpposite(Unit pUnitToMove, Unit pUnit)
+    {
+        HexDirection direction = HexDirection.E;
+        for (HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+        {
+            HexCell neighbor = pUnitToMove.Location.GetNeighbor(dir);
+            if (neighbor != null)
+            {
+                if (neighbor.Unit != null && neighbor.Unit == pUnit)
+                {
+                    direction = dir;
+                    break;
+                }
+            }
+        }
+
+        direction = direction.Opposite();
+        if (EmptyCell(pUnitToMove.Location.GetNeighbor(direction)))
+            Move(pUnitToMove, pUnitToMove.Location.GetNeighbor(direction));
+
+        else if (EmptyCell(pUnitToMove.Location.GetNeighbor(direction.Next())))
+            Move(pUnitToMove, pUnitToMove.Location.GetNeighbor(direction.Next()));
+
+        else if (EmptyCell(pUnitToMove.Location.GetNeighbor(direction.Previous())))
+            Move(pUnitToMove, pUnitToMove.Location.GetNeighbor(direction.Previous()));
+    }
+
+    private bool EmptyCell(HexCell pCell)
+    {
+        return !pCell.IsUnderwater && pCell.Unit == null && pCell.Explorable;
+    }
+
+    List<Unit> VisibleUnit(Unit currentUnit)
+    {
+        List<Unit> unitList = new List<Unit>();
+        List<HexCell> visibleCell = currentUnit.Grid.GetVisibleCells(currentUnit.Location, currentUnit.VisionRange);
+
+        foreach(HexCell cell in visibleCell)
+        {
+            if (cell.Unit != null && cell.Unit.specie != this.specie)
+            {
+                unitList.Add(cell.Unit);
+            }
+        }
+
+        return unitList;
+    }
 }

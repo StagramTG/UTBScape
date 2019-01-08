@@ -7,7 +7,7 @@ public class HexGameUI : MonoBehaviour {
 
 	HexCell currentCell;
 
-	HexUnit selectedUnit;
+	Unit selectedUnit;
 
 	public void SetEditMode (bool toggle) {
 		enabled = !toggle;
@@ -21,7 +21,7 @@ public class HexGameUI : MonoBehaviour {
 		}
 	}
 
-	void Update () {
+	/*void Update () {
 		if (!EventSystem.current.IsPointerOverGameObject()) {
 			if (Input.GetMouseButtonDown(0)) {
 				DoSelection();
@@ -35,7 +35,7 @@ public class HexGameUI : MonoBehaviour {
 				}
 			}
 		}
-	}
+	}*/
 
 	void DoSelection () {
 		grid.ClearPath();
@@ -56,12 +56,12 @@ public class HexGameUI : MonoBehaviour {
 		}
 	}
 
-	void DoMove () {
+	/*void DoMove () {
 		if (grid.HasPath) {
 			selectedUnit.Travel(grid.GetPath());
 			grid.ClearPath();
 		}
-	}
+	}*/
 
 	bool UpdateCurrentCell () {
 		HexCell cell =

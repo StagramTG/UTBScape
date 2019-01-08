@@ -33,7 +33,7 @@ public class HexGrid : MonoBehaviour {
 	HexCell currentPathFrom, currentPathTo;
 	bool currentPathExists;
 
-	List<HexUnit> units = new List<HexUnit>();
+	List<Unit> units = new List<Unit>();
 
 	HexCellShaderData cellShaderData;
 
@@ -51,7 +51,7 @@ public class HexGrid : MonoBehaviour {
 		CreateMap(psizeX, psizeY);
 	}
 
-	public void AddUnit (HexUnit unit, HexCell location, float orientation) {
+	public void AddUnit (Unit unit, HexCell location, float orientation) {
 		units.Add(unit);
 		unit.Grid = this;
 		unit.transform.SetParent(transform, false);
@@ -59,7 +59,7 @@ public class HexGrid : MonoBehaviour {
 		unit.Orientation = orientation;
 	}
 
-	public void RemoveUnit (HexUnit unit) {
+	public void RemoveUnit (Unit unit) {
 		units.Remove(unit);
 		unit.Die();
 	}
@@ -417,12 +417,12 @@ public class HexGrid : MonoBehaviour {
 			cells[i].ResetVisibility();
 		}
 		for (int i = 0; i < units.Count; i++) {
-			HexUnit unit = units[i];
+			Unit unit = units[i];
 			IncreaseVisibility(unit.Location, unit.VisionRange, unit.isPlayerUnit);
 		}
 	}
 
-	List<HexCell> GetVisibleCells (HexCell fromCell, int range) {
+	public List<HexCell> GetVisibleCells (HexCell fromCell, int range) {
 		List<HexCell> visibleCells = ListPool<HexCell>.Get();
 
 		searchFrontierPhase += 2;
