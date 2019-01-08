@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour {
 
         instantiatedWeapon = spawnedItem;
 
-        // Choose cell to attack
+        spawnedItem.GetComponent<Sword>().unit = currentUnit;
     }
 
     private void SetCurrentUnit(Unit pUnit)
