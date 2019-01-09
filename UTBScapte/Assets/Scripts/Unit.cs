@@ -66,10 +66,10 @@ public class Unit : HexUnit {
         if (life <= 0)
         {
             team.units.Remove(this);
-            team = null;
-            this.Die();
             if (team.units.Count == 0)
                 SceneManager.LoadScene(0);
+            team = null;
+            this.Die();
         }
     }
 

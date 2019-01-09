@@ -18,6 +18,7 @@ public class MapManager : MonoBehaviour
         mapGenerator.GenerateMap(mapX, mapY);
 
         Shader.DisableKeyword("HEX_MAP_EDIT_MODE");
+        //Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
         terrainMaterial.DisableKeyword("GRID_ON");
 
         return grid;
