@@ -4,6 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -103,6 +104,11 @@ public class GameManager : MonoBehaviour {
         Menu.SetActive(false);
     }
 
+    public void QuitGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     private void SetupArcherAction()
     {
         GameObject spawnedItem = GameObject.Instantiate(LongbowItemPackage.itemPrefab);
@@ -117,12 +123,9 @@ public class GameManager : MonoBehaviour {
     {
         GameObject spawnedItem = GameObject.Instantiate(Sword.itemPrefab);
         spawnedItem.SetActive(true);
-        //hand.otherHand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
+        hand.otherHand.AttachObject(spawnedItem, GrabTypes.Scripted, attachmentFlags);
 
         instantiatedWeapon = spawnedItem;
-
-        //Only for debug without HTC
-        //instantiatedWeapon.transform.position = player.trackingOriginTransform.position;
 
         spawnedItem.GetComponent<Sword>().unit = currentUnit;
     }
@@ -173,7 +176,7 @@ public class GameManager : MonoBehaviour {
         RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
         RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
 
-        Destroy(instantiatedWeapon);
+        instantiatedWeapon.GetComponent<Sword>().DeletePrefab();
         instantiatedWeapon = null;
     }
 

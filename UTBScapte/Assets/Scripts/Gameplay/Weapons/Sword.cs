@@ -6,7 +6,7 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(Interactable))]
 public class Sword : MonoBehaviour {
 
-    const float QTESequenceDelay = 5f;
+    const float QTESequenceDelay = 1f;
 
     public Unit unit;
 
@@ -20,10 +20,15 @@ public class Sword : MonoBehaviour {
 
     private void Start()
     {
-        cellChooser = Instantiate(cellChooserPrefab, unit.transform.position + Vector3.up, Quaternion.identity, null);
+        cellChooser = Instantiate(cellChooserPrefab, unit.transform.position + (1.5f * Vector3.up), Quaternion.identity, null);
     }
 
     private void OnDetachedFromHand(Hand hand)
+    {
+        DeletePrefab();
+    }
+
+    public void DeletePrefab()
     {
         Destroy(cellChooser);
         Destroy(qte);
