@@ -11,5 +11,10 @@ public class GetDirection : MonoBehaviour {
             HexDirection direction = other.GetComponent<CellChooserDirection>().direction;
             transform.parent.GetComponent<Sword>().DirectionChoosed(direction);
         }
+        if (other.CompareTag("QTE"))
+        {
+            other.gameObject.SetActive(false);
+            transform.parent.GetComponent<Sword>().ValidateQTE();
+        }
     }
 }

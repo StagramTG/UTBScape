@@ -23,8 +23,6 @@ public class Unit : HexUnit {
     private Color maxLifeColor = Color.green;
     private Color minLifeColor = Color.red;
 
-    private float lastUpdate = 0;
-
     public HexCell Location
     {
         get

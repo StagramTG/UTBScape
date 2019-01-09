@@ -6,6 +6,7 @@ TagManager:
   tags:
   - projectile
   - DirectionChooser
+  - QTE
   layers:
   - Default
   - TransparentFX

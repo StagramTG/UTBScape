@@ -7,6 +7,11 @@ public class MainMenuInteractions : MonoBehaviour
 {
     public List<CharacterSpecies> species;
 
+    /*private void Start()
+    {
+        PlayButtonPressed();
+    }*/
+
     public void PlayButtonPressed()
     {
         Debug.Log("Play pressed !!!");

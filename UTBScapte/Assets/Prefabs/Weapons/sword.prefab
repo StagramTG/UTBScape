@@ -169,7 +169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
-  cellChooser: {fileID: 1310489262383372, guid: 590ff00612e8f2b4eb84bd75e94ccac1,
+  cellChooserPrefab: {fileID: 1310489262383372, guid: 590ff00612e8f2b4eb84bd75e94ccac1,
+    type: 2}
+  qtePrefab: {fileID: 114704080226076486, guid: 9d0d65b195b3f1d4e937a2be65053e6c,
     type: 2}
 --- !u!114 &114482392368905514
 MonoBehaviour:
