@@ -89,4 +89,19 @@ public class TeamManager : MonoBehaviour
 
         changeActiveTeam(activeTeamTurnIndex);
     }
+
+    public int GetAliveUnitsForTeam(Team pTeam)
+    {
+        return pTeam.units.Count;
+    }
+
+    public int GetAliveUnitsForCurrentTeam()
+    {
+        return GetAliveUnitsForTeam(activeTeam);
+    }
+
+    public int GetAliveUnitsForOpponenetTeam()
+    {
+        return GetAliveUnitsForTeam(teams[1]);
+    }
 }

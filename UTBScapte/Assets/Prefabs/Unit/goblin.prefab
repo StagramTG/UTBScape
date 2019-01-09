@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 114749040055279246}
   - component: {fileID: 114238250758822056}
   - component: {fileID: 114486726427078580}
+  - component: {fileID: 114878988221955100}
   m_Layer: 5
   m_Name: LifeSlider
   m_TagString: Untagged
@@ -988,8 +989,7 @@ MonoBehaviour:
   classe: {fileID: 11400000, guid: 01c65c1d8496b5643ab8c6774ce94474, type: 2}
   specie: {fileID: 11400000, guid: 7d05dcdb192fdd242b5bfe4eb0dac218, type: 2}
   actionPossible: 1
-  lifeSlider: {fileID: 114410818078275900}
-  fillImage: {fileID: 114545878564052814}
+  lifeSlider: {fileID: 114878988221955100}
 --- !u!114 &114143342639983486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1172,6 +1172,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114878988221955100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585623423970744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e19a1b33caa1124eaf78e13260d0ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137689578849704176
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

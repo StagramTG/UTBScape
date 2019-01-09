@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Unit : HexUnit {
 
@@ -12,16 +12,13 @@ public class Unit : HexUnit {
 
     public bool actionPossible = true;
 
-    public Slider lifeSlider;
-    public Image fillImage;
+    public LifeSlider lifeSlider;
 
-    private int life;
-    private int maxLife;
+    public int maxLife;
+    public int life;
+
     private int damage;
     private Team team;
-
-    private Color maxLifeColor = Color.green;
-    private Color minLifeColor = Color.red;
 
     public HexCell Location
     {
@@ -47,13 +44,9 @@ public class Unit : HexUnit {
     public void Init()
     {
         life = classe.BaseLife + specie.LifeBoost;
-        maxLife = life;
         damage = classe.BaseDamage + specie.DamageBoost;
-
-        lifeSlider.minValue = 0;
-        lifeSlider.maxValue = life;
-        lifeSlider.value = life;
-        fillImage.color = maxLifeColor;
+        maxLife = life;
+        lifeSlider.InitValue(life);
     }
 
     public void SetTeam(Team pTeam)
@@ -68,15 +61,15 @@ public class Unit : HexUnit {
     public void TakeDamage(int pDamage)
     {
         life -= pDamage;
-
-        lifeSlider.value = life;
-        fillImage.color = Color.Lerp(maxLifeColor, minLifeColor, (maxLife - life) * 1f / maxLife);
+        lifeSlider.UpdateValue(life);
 
         if (life <= 0)
         {
             team.units.Remove(this);
             team = null;
             this.Die();
+            if (team.units.Count == 0)
+                SceneManager.LoadScene(0);
         }
     }
 

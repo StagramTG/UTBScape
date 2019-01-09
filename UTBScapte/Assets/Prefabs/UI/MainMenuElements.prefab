@@ -29,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1219730843140454
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 1888467548441608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.009}
-  m_LocalScale: {x: 0.5, y: 0.08, z: 0.15}
+  m_LocalScale: {x: 500, y: 50, z: 0.15}
   m_Children: []
   m_Father: {fileID: 224899601278961162}
   m_RootOrder: 1
@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 1422889045579170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.009}
-  m_LocalScale: {x: 0.5, y: 0.08, z: 0.15}
+  m_LocalScale: {x: 500, y: 50, z: 0.15}
   m_Children: []
   m_Father: {fileID: 224169661217086920}
   m_RootOrder: 1
@@ -654,7 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7867fdf76135bcd4c8a568c5f50e720e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpecies: {fileID: 11400000, guid: 7d05dcdb192fdd242b5bfe4eb0dac218, type: 2}
+  species:
+  - {fileID: 11400000, guid: 7d05dcdb192fdd242b5bfe4eb0dac218, type: 2}
+  - {fileID: 11400000, guid: f00f7c05531cd6d48bb583acdb17e745, type: 2}
 --- !u!222 &222367443605271694
 CanvasRenderer:
   m_ObjectHideFlags: 1

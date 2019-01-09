@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 114780061611067874}
   - component: {fileID: 114825236506091048}
   - component: {fileID: 114426731488241254}
+  - component: {fileID: 114976361276663938}
   m_Layer: 5
   m_Name: LifeSlider
   m_TagString: Untagged
@@ -318,8 +319,7 @@ MonoBehaviour:
   classe: {fileID: 11400000, guid: 01c65c1d8496b5643ab8c6774ce94474, type: 2}
   specie: {fileID: 11400000, guid: f00f7c05531cd6d48bb583acdb17e745, type: 2}
   actionPossible: 1
-  lifeSlider: {fileID: 114420558954827362}
-  fillImage: {fileID: 114459653758521608}
+  lifeSlider: {fileID: 114976361276663938}
 --- !u!114 &114780061611067874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -384,6 +384,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114976361276663938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188917373429452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e19a1b33caa1124eaf78e13260d0ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222432664366398950
 CanvasRenderer:
   m_ObjectHideFlags: 1

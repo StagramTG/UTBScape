@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
     public Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags;
 
     public GameObject Menu;
+    public GameObject CharacterInfoPanel;
     public Button actionButton;
 
     private HexGrid grid;
@@ -56,6 +57,12 @@ public class GameManager : MonoBehaviour {
             Menu.SetActive(!Menu.activeSelf);
         }
 
+        if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(player.leftHand.handType)) //Toggle menu
+        {
+            UpdateUnitMenu();
+            CharacterInfoPanel.SetActive(!CharacterInfoPanel.activeSelf);
+        }
+
         if (Input.GetButtonDown("Submit"))
         {
             EndTurn();
@@ -65,6 +72,17 @@ public class GameManager : MonoBehaviour {
         {
             SetupWarriorAction();
         }
+    }
+
+    private void UpdateUnitMenu()
+    {
+        LifeSlider slider = CharacterInfoPanel.GetComponentInChildren<LifeSlider>();
+        slider.InitValue(currentUnit.maxLife);
+        slider.UpdateValue(currentUnit.life);
+
+        CharacterInfoPanel.GetComponentsInChildren<Text>()[1].text = currentUnit.classe.Name == ClasseTypes.ARCHER ? "Archer" : "Guerrier";
+        CharacterInfoPanel.GetComponentsInChildren<Text>()[2].text = "Alliés : " + teamManager.GetAliveUnitsForCurrentTeam();
+        CharacterInfoPanel.GetComponentsInChildren<Text>()[3].text = "Ennemies : " + teamManager.GetAliveUnitsForOpponenetTeam();
     }
 
     public void EndTurn()
@@ -176,8 +194,11 @@ public class GameManager : MonoBehaviour {
         RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand);
         RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType.TwoHanded, hand.otherHand);
 
-        instantiatedWeapon.GetComponent<Sword>().DeletePrefab();
-        instantiatedWeapon = null;
+        if (instantiatedWeapon != null)
+        {
+            instantiatedWeapon.GetComponent<Sword>().DeletePrefab();
+            instantiatedWeapon = null;
+        }
     }
 
     private void RemoveMatchingItemTypesFromHand(ItemPackage.ItemPackageType packageType, Hand hand)

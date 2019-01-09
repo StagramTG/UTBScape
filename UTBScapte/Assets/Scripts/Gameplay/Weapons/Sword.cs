@@ -31,7 +31,8 @@ public class Sword : MonoBehaviour {
     public void DeletePrefab()
     {
         Destroy(cellChooser);
-        Destroy(qte);
+        if (qte != null)
+            Destroy(qte);
         Destroy(gameObject);
     }
 
